@@ -16,3 +16,4 @@ bin-release/
 *.ipa
 *.apk
 
+.idea
