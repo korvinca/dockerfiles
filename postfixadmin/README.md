@@ -1,4 +1,4 @@
-# About this image
+# About this image (Marc Richter)
 
 ![postfixadmin](http://i.imgur.com/UCtvKHR.png "postfixadmin")
 
