@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# ENV
+export DOMAIN="$(hostname --domain)"
+
+if [ -z "$DBPASS" ]; then
+  echo "Database password must be set !"
+  exit 1
+fi
+
+# Create user and set permission
+addgroup -g ${GID} postfixadmin && adduser -h /postfixadmin -s /bin/sh -D -G postfixadmin -u ${UID} postfixadmin
+
+# Overwrite config.local.php if /extra/config.local.php is found ...
+if [ -e /extra/config.local.php ]; then
+  # ... and only if it differs from /postfixadmin/config.local.php
+  if [ -e /postfixadmin/config.local.php ]; then
+    diff /postfixadmin/config.local.php /extra/config.local.php >/dev/null 2>/dev/null
+    if [ $? -ne 0 ]; then
+      cp -f /postfixadmin/config.local.php /postfixadmin/config.local.bak.php
+      cp -f /extra/config.local.php /postfixadmin/config.local.php
+      chown ${UID}:${GID} /postfixadmin/config.local.php
+    fi
+  fi
+fi
+
+# Make changes to settings in /postfixadmin/config.local.php
+if [ -e /postfixadmin/config.local.php ]; then
+  sed -i'' "s#xxDBSxx#${DBS}#g" /postfixadmin/config.local.php
+  sed -i'' "s#xxDBHOSTxx#${DBHOST}#g" /postfixadmin/config.local.php
+  sed -i'' "s#xxDBUSERxx#${DBUSER}#g" /postfixadmin/config.local.php
+  sed -i'' "s#xxDBPASSxx#${DBPASS}#g" /postfixadmin/config.local.php
+  sed -i'' "s#xxDBNAMExx#${DBNAME}#g" /postfixadmin/config.local.php
+  if [ ! -z "${SETUPPASS}" ]; then
+    grep -v '^\?>' /postfixadmin/config.local.php | grep -v setup_password > /postfixadmin/config.temp.php
+    grep setup_password /postfixadmin/config.inc.php | sed "s#changeme#${SETUPPASS}#g" >> /postfixadmin/config.temp.php
+    echo '?>' >> /postfixadmin/config.temp.php
+    chown ${UID}:${GID} /postfixadmin/config.temp.php
+    mv -f /postfixadmin/config.temp.php /postfixadmin/config.local.php
+  fi
+fi
+
+# Switch to new svn tag if set
+if [ "${VERSION}" != "trunk" ]; then
+  svn sw --force http://svn.code.sf.net/p/postfixadmin/code/tags/${VERSION} /postfixadmin
+fi
+
+# Execute hook script
+if [ -e /extra/init ]; then
+  if [ -x /extra/init ]; then
+    /extra/init
+  else
+    /bin/sh -c /extra/init
+  fi
+fi
+
+# Set permissions
+chown -R ${UID}:${GID} /postfixadmin /var/run/php-fpm.sock /var/lib/nginx /tmp
+
+# RUN !
+supervisord -n -c /etc/supervisord.conf
