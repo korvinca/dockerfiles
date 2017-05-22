@@ -57,64 +57,6 @@ The automatic setup script then guides you through the rest of the process
 - **SETUPPASS** = Postfix Admin setup password (*optional*)
 - **VERSION** = Postfix Admin version to use. (*optional*, default: trunk)
 
-### The special folder /extra
-
-When you restart a Docker container, you usually delete it and create a new one afterwards. Docker offers a way to keep your data with the concept of VOLUMES, but I, personally, don't like VOLUMES. You can use them if you like, but I won't describe how to do so in here.
-Since I'm more a fan for Bind mounts of directories from the Host's filesystem, this will be the way, I describe with the following.
-The basic idea is to provide a persistent data store, mounted at ``/extra`` within the container to make some additional features of this image work (like persistent configuration and startup hook)
-
-There's an commandline option for ``docker run``, which maps (mounts) any volume to a path inside a docker container: ``-v``. Not only this can map Docker VOLUMES from other Docker containers, but also it can make directories from the Docker Host available inside any container.
-Alternatively, you can also use Docker VOLUMES to provide a persistent data store mounted at ``/extra``.
-
-First, create an empty folder anywhere on your docker host. For example, lets use ``/home/foobar/folder``:
-
-```
-#> mkdir -p /home/foobar/folder
-```
-
-Finally, you have to bind mount this folder to your Postfix Admin container by adding the following to the command line of your ``docker run`` command:
-
-```
--v /home/foobar/folder:/extra:ro
-```
-
-This makes everything inside the folder ``/home/foobar/folder`` of your Docker host to be available at ``/extra`` inside your container.
-In this example, the optional parameter ``:ro`` was added, which makes the mount to be read-only inside your container. This is an additional security measure. If you plan to copy files (like your ``/postfixadmin/config.local.php`` file) into ``/extra``, you should remove that parameter or change it to be ``:rw``, which both make that mount Read/Write.
-
-### Startup hook
-
-This can be used to enable the startup hook - functionality this image provides.
-Whenever there is a file named ``/extra/init``, it is assumed to be a shell script and gets executed just before the daemons are started.
-
-**Note:** You have to make sure, that script does not get stuck by starting something in the foreground, for example, since this will prevent the remaining startup process from being executed:
-
-```
-#> touch /home/foobar/folder/init
-#> chmod +x /home/foobar/folder/init
-```
-
-You can enter any commands into that file you desire; they will be executed just before the daemons are started. For example, you could write the following into that file:
-
-```
-rm -f /postfixadmin/CHANGELOG.TXT
-```
-
-To have the file ``/postfixadmin/CHANGELOG.TXT`` deleted before the webserver makes it available.
-
-**Note:** The shebang line (``#! ...``) should point either to ``/bin/ash`` or ``/bin/sh``; ``bash`` is not available. Therefore, please stick to compatible syntax for these shells to make sure your script works as expected.
-
-### Preserve Postfix Admin configuration
-
-Postfix Admin has two configuration files:
-
-- ``config.inc.php``: This is the **factory default configuration** file, shipped with Postfix Admin. This should never be changed, since it's contents may be overwritten at any time and your local changes are lost.
-- ``config.local.php``: This file is **for all your local changes to the factory default config**. When there are two concurrent settings in ``config.inc.php`` and ``config.local.php``, the settings defined in here takes precedence. Also, this file is not shipped with Postfix Admin code and therefore should never get overwritten by these.
-
-When you first start a container and there is no file named ``/extra/config.local.php`` available, ``/postfixadmin/config.local.php`` is created by what you have set as environment variables.
-If ``/extra/config.local.php`` is available, it will be copied to ``/postfixadmin/config.local.php`` whenever the container starts (even if there is just nonsense in there!).
-
-This is by design and the way the configuration preservation works: During setup, you will make those changes to ``/postfixadmin/config.local.php`` as Postfix Admin setup script suggests or you want to take over from ``/postfixadmin/config.inc.php`` with your own values. When everything works as you like, you just copy ``/postfixadmin/config.inc.php`` to ``/extra/config.local.php``. Next time you restart your container, it will be restored.
-
 ### Using PostgreSQL instead of MySQL
 
 By default, the Postfix Admin configuration option ``$CONF['database_type']`` is set to the content of the variable ``$DBS``, which is set to ``mysqli`` by default. This results in:
@@ -192,3 +134,23 @@ Startup:
 ```
 docker-compose up -d
 ```
+
+### Setup postfixadmin
+
+1 - Go to the setup page : https://postfixadmin.domain.tld/setup.php
+
+:bulb: Don't forget to add a new A/CNAME record in your DNS zone.
+
+2 - Define the setup password
+
+3 - Set the setup hash
+
+docker exec -ti postfixadmin setup
+
+> Postfixadmin setup hash : ffdeb741c58db70d060ddb170af4623a:54e0ac9a55d69c5e53d214c7ad7f1e3df40a3caa
+Setup done.
+4 - Create admin account
+
+5 - Go to the login page : https://postfixadmin.your-domain.tld/
+
+6 - You can now create your domains, mailboxes, alias...etc :)

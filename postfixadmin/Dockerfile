@@ -1,7 +1,7 @@
 FROM alpine:3.3
 MAINTAINER KorvinCA <korvinca@gmail.com>
 
-ENV GID=991 UID=991 VERSION=trunk DBHOST=dbhost DBUSER=postfix DBNAME=postfix DBS=mysqli
+ENV GID=991 UID=991 VERSION=postfixadmin-3.0.2 DBHOST=dbhost DBUSER=postfix DBNAME=postfix DBS=mysqli
 
 RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
  && apk -U add \
@@ -24,7 +24,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php/php-fpm.conf
 COPY postfixadmin.ini /etc/supervisor.d/postfixadmin.ini
 COPY startup /usr/local/bin/startup
+COPY setup /usr/local/bin/setup
 
+RUN chmod +x /usr/local/bin/setup
 RUN chmod +x /usr/local/bin/startup ; \
      chown ${UID}:${GID} -R /etc/supervisor.d /postfixadmin
 
