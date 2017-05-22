@@ -90,7 +90,7 @@ If you want to use another version, you can do so by defining the variable ``$VE
 ```
 
 This switches to the specified tag (Subversion) before starting the daemons.
-You can use every [tag in the Postfix Admin Subversion tree](http://svn.code.sf.net/p/postfixadmin/code/tags/). For example, if you would like to use version ``2.92`` of Postfix Admin, you would add the following to your Docker commandline:
+You can use every [tag in the Postfix Admin Subversion tree](http://svn.code.sf.net/p/postfixadmin/code/tags/). For example, if you would like to use version ``3.02`` of Postfix Admin, you would add the following to your Docker commandline:
 
 ```
 -e VERSION=postfixadmin-3.02
@@ -104,7 +104,7 @@ The following is an example for docker-compose, using MariaDB as DBS:
 
 ```
 postfixadmin:
-  image: derjudge/postfixadmin
+  image: korvinca/postfixadmin
   container_name: postfixadmin
   domainname: domain.tld
   hostname: mail
@@ -121,7 +121,7 @@ postfixadmin:
 mariadb:
   image: mariadb:10.1
   volumes:
-    - /docker/mysql/db:/var/lib/mysql
+    - /mnt/docker/mysql/db:/var/lib/mysql
   environment:
     - MYSQL_ROOT_PASSWORD=xxxx
     - MYSQL_DATABASE=postfix
