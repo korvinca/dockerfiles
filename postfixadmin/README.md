@@ -27,7 +27,7 @@ docker run -d \
   -p 80:80 \
   -e DBPASS=xxxxxxxx \
   -h mail.domain.tld \
-  derjudge/postfixadmin
+  korvinca/postfixadmin
 ```
 
 - ``--name postfixadmin``: "*postfixadmin*" can be anything you like to make it easy for you to identify the container in Docker's list of containers and to refer to it in your setups and scripts.
@@ -93,7 +93,7 @@ This switches to the specified tag (Subversion) before starting the daemons.
 You can use every [tag in the Postfix Admin Subversion tree](http://svn.code.sf.net/p/postfixadmin/code/tags/). For example, if you would like to use version ``2.92`` of Postfix Admin, you would add the following to your Docker commandline:
 
 ```
--e VERSION=postfixadmin-2.92
+-e VERSION=postfixadmin-3.02
 ```
 
 ### Docker-compose
@@ -149,8 +149,9 @@ docker exec -ti postfixadmin setup
 
 > Postfixadmin setup hash : ffdeb741c58db70d060ddb170af4623a:54e0ac9a55d69c5e53d214c7ad7f1e3df40a3caa
 Setup done.
+
 4 - Create admin account
 
 5 - Go to the login page : https://postfixadmin.your-domain.tld/
 
-6 - You can now create your domains, mailboxes, alias...etc :)
+6 - You can now create your domains, mailboxes, alias...etc
