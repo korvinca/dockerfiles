@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo
+echo "Welcome to ngxproxy utility."
+echo "Do you want to reload nginx?"
+echo
+
+while [[ "$RELOAD" !=  "y" && "$RELOAD" != "n" ]]; do
+    read -p "Reload nginx now? [y/n]: " RELOAD
+done
+
+if [ "$RELOAD" == "y" ]; then
+    su-exec $UID:$GID nginx -s reload
+    echo "nginx successfully reloaded."
+else
+    echo "Restart manually nginx to enable changes."
+fi
+
+echo
+exit 0
