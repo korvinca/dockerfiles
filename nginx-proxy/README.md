@@ -1,4 +1,4 @@
-## wonderfall/boring-nginx
+## korvinca/nginx-proxy
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/115px-Nginx_logo.svg.png)
 
@@ -49,7 +49,7 @@ This is nginx statically linked against BoringSSL, with embedded Brotli support.
 https://github.com/hardware/mailserver/wiki/Reverse-proxy-configuration
 
 You can use `ngxproxy` to generate a *vhost* through an easy process : `docker exec -ti nginx ngxproxy`. `ngxpasswd` can generate htpasswd files : `docker exec -ti nginx ngxpasswd`. Both utilites are interactive so you won't feel lost.
-You can use `reload` to reload nginx config files 
+You can use `reload` or `reload_org` (with conformation) to reload nginx config files
 
 Some configuration files located in `/etc/nginx/conf` are already provided, you can use them with the `include` directive.
 
