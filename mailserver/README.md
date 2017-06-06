@@ -1,4 +1,4 @@
-## hardware/mailserver [![](https://badges.gitter.im/hardware-mailserver/Lobby.svg)](https://gitter.im/hardware-mailserver/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+## Fork of hardware/mailserver [![](https://badges.gitter.im/hardware-mailserver/Lobby.svg)](https://gitter.im/hardware-mailserver/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ### Build
 
@@ -101,6 +101,10 @@ docker logs -f mailserver
 ```
 
 ### Environment variables
+
+:warning: Use only ASCII printable characters in environment variables : https://en.wikipedia.org/wiki/ASCII#Printable_characters
+
+Github issue : https://github.com/hardware/mailserver/issues/118
 
 | Variable | Description | Type | Default value |
 | -------- | ----------- | ---- | ------------- |
