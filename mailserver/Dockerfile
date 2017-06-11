@@ -1,7 +1,7 @@
 FROM debian:jessie-slim
 
 LABEL description "Simple and full-featured mail server using Docker" \
-      maintainer="Hardware <contact@meshup.net>"
+      maintainer="KorvinCA <korvinca@gmail.com>"
 
 ARG TINI_VER=0.14.0
 
@@ -11,8 +11,7 @@ ARG TINI_GPG_SHORTID="0x0527A9B7"
 ARG TINI_GPG_FINGERPRINT="6380 DC42 8747 F6C3 93FE  ACA5 9A84 159D 7001 A4E5"
 ARG TINI_SHA256_HASH="420e47096487f72e3e48cca85ce379f18f9c6d2c3809ecc4bcf34e2b35f7c490"
 
-RUN echo "America/Los_Angeles" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
+RUN echo "America/Los_Angeles" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 RUN BUILD_DEPS=" \
     wget" \
@@ -38,6 +37,7 @@ RUN BUILD_DEPS=" \
     spamassassin \
     clamav-daemon \
     clamav-milter \
+    libsasl2-modules \
     libsys-syslog-perl \
     libmail-spf-perl \
     libhttp-message-perl \
