@@ -1,0 +1,4 @@
+$answer{'ADMIN_EMAIL'} = 'admin@mydomain.com';
+$answer{'ADMIN_PASSWORD'} = 'password';
+$answer{'ADMIN_REALNAME'} = 'Admin Admin';
+$answer{'NO_PAUSE'} = 1
