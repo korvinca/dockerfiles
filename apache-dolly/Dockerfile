@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND teletype
 RUN apt-get update && \
     apt-get install -y sendmail \
     nano \
-    apache2 &&
+    apache2 && \
     a2enmod rewrite
 
 ENV APACHE_RUN_USER www-data

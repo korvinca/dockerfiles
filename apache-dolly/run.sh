@@ -6,7 +6,8 @@ PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING:-"E_ALL & ~E_DEPRECATED & ~E_NOTICE"}
 sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ America\/Los_Angeles/g' /etc/php5/cli/php.ini
 sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ America\/Los_Angeles/g' /etc/php5/apache2/php.ini
 sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/apache2/php.ini
-sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/cli/php.ini
+sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/apache2/php.ini
+sed -ri 's/^open_basedir\s*=\s*Off/open_basedir none/g' /etc/php5/cli/php.ini
 sed -ri "s/^error_reporting\s*=.*$//g" /etc/php5/apache2/php.ini
 sed -ri "s/^error_reporting\s*=.*$//g" /etc/php5/cli/php.ini
 sed -ri 's/post_max_size = 8M/post_max_size = 50M/g' /etc/php5/apache2/php.ini
