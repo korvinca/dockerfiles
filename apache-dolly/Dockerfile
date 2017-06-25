@@ -35,7 +35,7 @@ RUN apt-get install -y php5 \
 
 EXPOSE 80
 
-VOLUME /var/www /etc/apache2/sites-enabled
+VOLUME /var/www /etc/apache2/sites-enabled /var/log/apache2
 
 CMD ["/usr/local/bin/run.sh"]
 #CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
