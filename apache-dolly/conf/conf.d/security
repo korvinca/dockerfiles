@@ -1,0 +1,131 @@
+#
+# Default directory settings
+#
+<Directory />
+        # Description:  Types of directives that are allowed in .htaccess files
+        # Syntax:       AllowOverride All|None|directive-type [directive-type] ...
+        # Default:      AllowOverride All
+        # Context:      directory
+        # Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride
+        # Status:       Core
+        # Module:       core
+        AllowOverride All
+
+        Order Deny,Allow
+        Deny from all
+        Options -All +FollowSymLinks
+        DirectoryIndex index.php index.html
+
+        # Description:  Authorization realm for use in HTTP authentication
+        # Syntax:       AuthName auth-domain
+        # Context:      directory, .htaccess
+        # Override:     AuthConfig
+        # Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#authname
+        # Status:       Core
+        # Module:       core
+        AuthName "Need Authorization"
+
+        # Description:  Type of user authentication
+        # Syntax:       AuthType Basic|Digest
+        # Context:      directory, .htaccess
+        # Override:     AuthConfig
+        # Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#authtype
+        # Status:       Core
+        # Module:       core
+        AuthType Basic
+
+        # Description:  Selects which authenticated users can access a resource
+        # Syntax:       Require entity-name [entity-name] ...
+        # Context:      directory, .htaccess
+        # Override:     AuthConfig
+        # Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#require
+        # Status:       Core
+        # Module:       core
+        #Require valid-user
+
+        # Description:          User authentication using text files
+        # Status:               Base
+        # Module Identifier:    authn_file_module
+        # Source File:          mod_authn_file.c
+        # Hyperlink:            http://httpd.apache.org/docs/2.2/mod/mod_authn_file.html
+        # Compatibility:        Available in Apache 2.1 and later
+        #AuthUserFile /etc/apache2/passwd/filename
+</Directory>
+
+# Description:  Name of the distributed configuration file
+# Syntax:       AccessFileName filename [filename] ...
+# Default:      AccessFileName .htaccess
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#accessfilename
+# Status:       Core
+# Module:       core
+AccessFileName .htaccess
+
+#
+# Deny for .htaccess file
+#
+<Files ~ "^\.ht">
+        Order allow,deny
+        Deny from all
+        Satisfy all
+</Files>
+
+# Description:  Email address that the server includes in error messages sent to the client
+# Syntax:       ServerAdmin email-address|URL
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#serveradmin
+# Status:       Core
+# Module:       core
+ServerAdmin admin@korolevskiy.com
+
+# Description:  Configures the Server HTTP response header
+# Syntax:       ServerTokens Major|Minor|Min[imal]|Prod[uctOnly]|OS|Full
+# Default:      ServerTokens Full
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#servertokens
+# Status:       Core
+# Module:       core
+ServerTokens Prod
+
+# Description:  Configures the footer on server-generated documents
+# Syntax:       ServerSignature On|Off|EMail
+# Default:      ServerSignature Off
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#serversignature
+# Status:       Core
+# Module:       core
+ServerSignature Off
+
+# Description:  Determines the behaviour on TRACE requests
+# Syntax:       TraceEnable [on|off|extended]
+# Default:      TraceEnable on
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#traceenable
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache 1.3.34, 2.0.55 and later
+TraceEnable Off
+
+# === >>> Защита от атаки на апач <<<
+# Number of ranges allowed before returning the complete resource
+# default | unlimited | none | number-of-ranges
+# Связано с убийцей апача http://habrahabr.ru/post/127029/ изменено на none
+
+# Description:  Number of ranges allowed before returning the complete resource
+# Syntax:       MaxRanges default | unlimited | none | number-of-ranges
+# Default:      MaxRanges 200
+# Context:      server config, virtual host, directory
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache HTTP Server 2.2.21 and later
+# Warning:      Apache attack http://habrahabr.ru/post/127029/
+#MaxRanges 0
+
+#
+# Apache attack fix before version 2.2.21 (before include MaxRanges directive)
+#
+<IfModule mod_headers.c>
+        RequestHeader unset Range
+        RequestHeader unset Request-Range
+</IfModule>

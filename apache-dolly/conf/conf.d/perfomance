@@ -1,0 +1,171 @@
+# Description:  Use the kernel sendfile support to deliver files to the client
+# Syntax:       EnableSendfile On|Off
+# Default:      EnableSendfile On
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     FileInfo
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#enablesendfile
+# Status:       Core
+# Module:       core
+# Compatibility:Available in version 2.0.44 and later
+#EnableSendfile On
+
+# Description:  Configures optimizations for a Protocol's Listener Sockets
+# Syntax:       AcceptFilter protocol accept_filter
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#acceptfilter
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache 2.1.5 and later
+#AcceptFilter http data
+
+# Description:  Amount of time the server will wait for certain events before failing a request
+# Syntax:       TimeOut seconds
+# Default:      TimeOut 300
+# Context:      server config, virtual host
+# Htperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#timeout
+# Status:       Core
+# Module:       core
+TimeOut 310
+
+# Description:  Enables HTTP persistent connections
+# Syntax:       KeepAlive On|Off
+# Default:      KeepAlive On
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#keepalive
+# Status:       Core
+# Module:       core
+#KeepAlive on
+
+# Description:  Number of requests allowed on a persistent connection
+# Syntax:       MaxKeepAliveRequests number
+# Default:      MaxKeepAliveRequests 100
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#maxkeepaliverequests
+# Status:       Core
+# Module:       core
+#MaxKeepAliveRequests 100
+
+# Description:  Amount of time the server will wait for subsequent requests on a persistent connection
+# Syntax:       KeepAliveTimeout seconds
+# Default:      KeepAliveTimeout 5
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#keepalivetimeout
+# Status:       Core
+# Module:       core
+KeepAliveTimeout 75
+
+# Description:  Determine maximum number of internal redirects and nested subrequests
+# Syntax:       LimitInternalRecursion number [number]
+# Default:      LimitInternalRecursion 10
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitinternalrecursion
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache 2.0.47 and later
+LimitInternalRecursion 5
+
+# Description:  Restricts the total size of the HTTP request body sent from the client
+# Syntax:       LimitRequestBody bytes
+# Default:      LimitRequestBody 0
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitrequestbody
+# Status:       Core
+# Module:       core
+# Note:         not applicable to proxy requests.
+LimitRequestBody 0
+
+# Description:  Limits the number of HTTP request header fields that will be accepted from the client
+# Syntax:       LimitRequestFields number
+# Default:      LimitRequestFields 100
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitrequestfields
+# Status:       Core
+# Module:       core
+# Warning:
+# When name-based virtual hosting is used, the value for this
+# directive is taken from the default (first-listed) virtual
+# host for the NameVirtualHost the connection was mapped to.
+#LimitRequestFields 100
+
+# Description:  Limits the size of the HTTP request header allowed from the client
+# Syntax:       LimitRequestFieldSize bytes
+# Default:      LimitRequestFieldSize 8190
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitrequestfieldsize
+# Status:       Core
+# Module:       core
+# Warning:
+# When name-based virtual hosting is used, the value for this
+# directive is taken from the default (first-listed) virtual
+# host for the NameVirtualHost the connection was mapped to.
+#LimitRequestFieldSize 8190
+
+# Description:  Limit the size of the HTTP request line that will be accepted from the client
+# Syntax:       LimitRequestLine bytes
+# Default:      LimitRequestLine 8190
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitrequestline
+# Status:       Core
+# Module:       core
+# Warning:
+# When name-based virtual hosting is used, the value for this
+# directive is taken from the default (first-listed) virtual
+# host for the NameVirtualHost the connection was mapped to.
+#LimitRequestLine 8190
+
+# Description:  Limits the size of an XML-based request body
+# Syntax:       LimitXMLRequestBody bytes
+# Default:      LimitXMLRequestBody 1000000
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#limitxmlrequestbody
+# Status:       Core
+# Module:       core
+#LimitXMLRequestBody 1000000
+
+# Description:  Limits the CPU consumption of processes launched by Apache children
+# Syntax:       RLimitCPU seconds|max [seconds|max]
+# Default:      Unset; uses operating system defaults
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#rlimitcpu
+# Status:       Core
+# Module:       core
+#RLimitCPU
+
+# Description:  Limits the memory consumption of processes launched by Apache children
+# Syntax:       RLimitMEM bytes|max [bytes|max]
+# Default:      Unset; uses operating system defaults
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#rlimitmem
+# Status:       Core
+# Module:       core
+#RLimitMEM
+
+# Description:  Limits the number of processes that can be launched by processes launched by Apache children
+# Syntax:       RLimitNPROC number|max [number|max]
+# Default:      Unset; uses operating system defaults
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     All
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#rlimitnproc
+# Status:       Core
+# Module:       core
+# Note:
+# If CGI processes are not running under user ids other than the web server
+# user id, this directive will limit the number of processes that the server
+# itself can create. Evidence of this situation will be indicated by cannot
+# fork messages in the error_log.
+#RLimitNPROC
+
+# Description:  Use memory-mapping to read files during delivery
+# Syntax:       EnableMMAP On|Off
+# Default:      EnableMMAP On
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     FileInfo
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#enablemmap
+# Status:       Core
+# Module:       core
+#EnableMMAP On
+

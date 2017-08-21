@@ -1,0 +1,62 @@
+# Description:  Location where the server will log errors
+# Syntax:       ErrorLog file-path|syslog[:facility]
+# Default:      ErrorLog logs/error_log (Unix) ErrorLog logs/error.log (Windows and OS/2)
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#errorlog
+# Status:       Core
+# Module:       core
+# Note:
+# When entering a file path on non-Unix platforms, care should be taken to make sure
+# that only forward slashes are used even though the platform may allow the use of back slashes.
+# In general it is a good idea to always use forward slashes throughout the configuration files.
+ErrorLog ${APACHE_LOG_DIR}/error.log
+
+# Description:  Controls the verbosity of the ErrorLog
+# Syntax:       LogLevel level
+# Default:      LogLevel warn
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#loglevel
+# Value:        emerg, alert, crit, error, warn, notice, info, debug
+# Status:       Core
+# Module:       core
+LogLevel warn
+
+# Description:  Enables DNS lookups on client IP addresses
+# Syntax:       HostnameLookups On|Off|Double
+# Default:      HostnameLookups Off
+# Context:      server config, virtual host, directory
+# Status:       Core
+# Module:       core
+HostnameLookups Off
+
+# Description:  Describes a format for use in a log file
+# Syntax:       LogFormat format|nickname [nickname]
+# Default:      LogFormat "%h %l %u %t \"%r\" %>s %b"
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#logformat
+# Status:       Base
+# Module:       mod_log_config
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+# Description:  Sets filename and format of log file
+# Syntax:       CustomLog file|pipe format|nickname [env=[!]environment-variable]
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#customlogg
+# Status:       Base
+# Module:       mod_log_config
+#CustomLog ${APACHE_LOG_DIR}/other_vhosts_access.log vhost_combined
+
+# Description:  Buffer log entries in memory before writing to disk
+# Syntax:       BufferedLogs On|Off
+# Default:      BufferedLogs Off
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#bufferedlogs
+# Status:       Base
+# Module:       mod_log_config
+# Compatibility:Available in versions 2.0.41 and later.
+# Attention:    This directive is experimental and should be used with caution.
+BufferedLogs Off

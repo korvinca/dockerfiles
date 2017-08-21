@@ -1,0 +1,51 @@
+# Description:  Hostname and port that the server uses to identify itself
+# Syntax:       ServerName [scheme://]fully-qualified-domain-name[:port]
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#servername
+# Status:       Core
+# Module:       core
+# Compatibility:In version 2.0, this directive supersedes the functionality of the Port directive from version 1.3.
+#ServerName foo.bar
+
+# Description:  Alternate names for a host used when matching requests to name-virtual hosts
+# Syntax:       ServerAlias hostname [hostname] ...
+# Context:      virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#serveralias
+# Status:       Core
+# Module:       core
+#ServerAlias www.foo.bar
+
+# Description:  Legacy URL pathname for a name-based virtual host that is accessed by an incompatible browser
+# Syntax:       ServerPath URL-path
+# Context:      virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#serverpath
+# Status:       Core
+# Module:       core
+#ServerPath foo.bar/path
+
+# Description:  Designates an IP address for name-virtual hosting
+# Syntax:       NameVirtualHost addr[:port]
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#namevirtualhost
+# Status:       Core
+# Module:       core
+# !!!: using in ports.conf
+#NameVirtualHost *:80
+
+# Description:  Designates an IP address for name-virtual hosting
+# Syntax:       NameVirtualHost addr[:port]
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#namevirtualhost
+# Status:       Core
+# Module:       core
+# !!!: using in ports.conf
+#NameVirtualHost *:80
+
+# Description:  Directory that forms the main document tree visible from the web
+# Syntax:       DocumentRoot directory-path
+# Default:      DocumentRoot /usr/local/apache/htdocs
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#documentroot
+# Status:       Core
+# Module:       core
+DocumentRoot /usr/share/apache2/www

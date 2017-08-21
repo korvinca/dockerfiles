@@ -1,0 +1,12 @@
+# Description:  What the server will return to the client in case of an error
+# Syntax:       ErrorDocument error-code document
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     FileInfo
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#errordocument
+# Status:       Core
+# Module:       core
+# Compatibility:Quoting syntax for text messages is different in Apache 2.0
+#ErrorDocument 403 "Wow paule!!!"
+#ErrorDocument 404 "Where is it man?"
+#ErrorDocument 500 "Booom bah bah!!!"
+#ErrorDocument 503 "/error/503.html"

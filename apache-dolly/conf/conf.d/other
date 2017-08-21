@@ -1,0 +1,69 @@
+# Description:  Resources accept trailing pathname information
+# Syntax:       AcceptPathInfo On|Off|Default
+# Default:      AcceptPathInfo Default
+# Context:      server config, virtual host, directory, .htaccess
+# Override:     FileInfo
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#acceptpathinfo
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache 2.0.30 and later
+#AcceptPathInfo Default
+
+# Description:  Configures how the server determines its own name and port
+# Syntax:       UseCanonicalName On|Off|DNS
+# Default:      UseCanonicalName Off
+# Context:      server config, virtual host, directory
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#usecanonicalname
+# Status:       Core
+# Module:       core
+#UseCanonicalName Off
+
+# Description:  Configures how the server determines its own name and port
+# Syntax:       UseCanonicalPhysicalPort On|Off
+# Default:      UseCanonicalPhysicalPort Off
+# Context:      server config, virtual host, directory
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#usecanonicalphysicalport
+# Status:       Core
+# Module:       core
+#UseCanonicalPhysicalPort Off
+
+# Description:  Determines whether encoded path separators in URLs are allowed to be passed through
+# Syntax:       AllowEncodedSlashes On|Off|NoDecode
+# Default:      AllowEncodedSlashes Off
+# Context:      server config, virtual host
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#allowencodedslashes
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache httpd 2.0.46 and later. NoDecode option available in 2.2.18 and later.
+# Note:
+# If encoded slashes are needed in path info, use of NoDecode is strongly recommended as a security measure.
+# Allowing slashes to be decoded could potentially allow unsafe paths.
+#AllowEncodedSlashes Off
+
+# Description:  Technique for locating the interpreter for CGI scripts
+# Syntax:       CGIMapExtension cgi-path .extension
+# Context:      directory, .htaccess
+# Override:     FileInfo
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#cgimapextension
+# Status:       Core
+# Module:       core
+# Compatibility:NetWare only
+#CGIMapExtension sys:\foo.nlm .foo
+
+# Description:  Protocol for a listening socket
+# Syntax:       Protocol protocol
+# Context:      server config, virtual host
+# Htperlink:    http://httpd.apache.org/docs/2.2/mod/core.html#protocol
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache 2.1.5 and later. On Windows from Apache 2.3.3 and later.
+#Protocol http
+
+# Description:  Enable or disable the suEXEC feature
+# Syntax:       Suexec On|Off
+# Default:      On if suexec binary exists with proper owner and mode, Off otherwise
+# Context:      server config
+# Status:       Core
+# Module:       core
+# Compatibility:Available in Apache httpd 2.2.18 and later
+#Suexec Off

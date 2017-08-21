@@ -1,0 +1,89 @@
+# These need to be set in /etc/apache2/envvar
+# User ${APACHE_RUN_USER}, Group ${APACHE_RUN_GROUP}
+
+# Description:  The userid under which the server will answer requests
+# Syntax:       User unix-userid
+# Default:      User #-1
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mpm_common.html#user
+# Status:       MPM
+# Module:       prefork, worker
+# Compatibility:Only valid in global server config since Apache 2.0
+User ${APACHE_RUN_USER}
+
+# Description:  Group under which the server will answer requests
+# Syntax:       Group unix-group
+# Default:      Group #-1
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mpm_common.html#group
+# Status:       MPM
+# Module:       beos, mpmt_os2, prefork, worker
+# Compatibility:Only valid in global server config since Apache 2.0
+Group ${APACHE_RUN_GROUP}
+
+# Description:  IP addresses and ports that the server listens to
+# Syntax:       Listen [IP-address:]portnumber [protocol]
+# Context:      server config
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/mpm_common.html#listen
+# Status:       MPM
+# Module:       beos, mpm_netware, mpm_winnt, mpmt_os2, prefork, worker, event
+# Compatibility:
+# Required directive since Apache 2.0
+# The protocol argument was added in 2.1.5
+# !!!: using in ports.conf
+#Listen 80 http
+
+#
+# >>> MPM COMMON HYPERLINK: http://httpd.apache.org/docs/2.2/mod/mpm_common.html
+#
+
+#
+# Hyperlink:    http://mpm-itk.sesse.net/
+# itk based on mpm_prefork
+#
+<IfModule mpm_itk_module>
+        AssignUserID ${APACHE_RUN_USER} ${APACHE_RUN_GROUP}
+	NiceValue		-2
+        StartServers            5
+        MinSpareServers         10
+        MaxSpareServers         20
+        MaxClients              150
+        MaxRequestsPerChild     4000
+</IfModule>
+
+#
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/prefork.html
+#
+<IfModule mpm_prefork_module>
+        StartServers            5
+        MinSpareServers         10
+        MaxSpareServers         20
+        MaxClients              150
+        MaxRequestsPerChild     4000
+</IfModule>
+
+#
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/worker.html
+#
+<IfModule mpm_worker_module>
+        StartServers          2
+        MinSpareThreads      25
+        MaxSpareThreads      75
+        ThreadLimit          64
+        ThreadsPerChild      25
+        MaxClients          150
+        MaxRequestsPerChild   0
+</IfModule>
+
+#
+# Hyperlink:    http://httpd.apache.org/docs/2.2/mod/event.html
+#
+<IfModule mpm_event_module>
+        StartServers          2
+        MaxClients          150
+        MinSpareThreads      25
+        MaxSpareThreads      75
+        ThreadLimit          64
+        ThreadsPerChild      25
+        MaxRequestsPerChild   0
+</IfModule>
