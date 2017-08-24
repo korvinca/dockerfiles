@@ -4,3 +4,14 @@ proxy_set_header        X-Forwarded-For      $proxy_add_x_forwarded_for;
 proxy_set_header        X-Remote-Port        $remote_port;
 proxy_set_header        X-Forwarded-Proto    $scheme;
 proxy_redirect          off;
+
+proxy_buffers 32 8k;
+proxy_buffering on;
+
+proxy_ignore_client_abort off;
+proxy_intercept_errors off;
+proxy_read_timeout 320s;
+
+# killapache.pl
+proxy_set_header Range "";
+proxy_set_header Request-Range "";
