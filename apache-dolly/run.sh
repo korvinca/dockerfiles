@@ -30,6 +30,10 @@ echo "apc.max_file_size = 4M" >> /etc/php5/apache2/php.ini
 echo "apc.num_files_hint = 2048" >> /etc/php5/apache2/php.ini
 echo "apc.file_update_protection = 3" >> /etc/php5/apache2/php.ini
 
+# Postfix
+mkfifo /var/spool/postfix/public/pickup
+ps aux | grep mail kill /etc/init.d/postfix restart
+
 #Apache2
 sed -ri 's/KeepAlive On/KeepAlive Off/g' /etc/apache2/apache2.conf
 sed -ri 's/Timeout 300/Timeout 310/g' /etc/apache2/apache2.conf
