@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+    ServerName site.com
+    ServerAlias www.site.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www
+
+    ErrorLog /dev/stdout
+    CustomLog /dev/stdout combined
+
+    LogLevel info
+    php_admin_value open_basedir "/var/www/:."
+    php_admin_value safe_mode "on"
+    php_admin_value upload_tmp_dir "/tmp"
+    php_admin_value session.save_path "/tmp"
+</VirtualHost>
