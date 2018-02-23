@@ -1,4 +1,4 @@
-# dockerfiles-centos-ssh
+# dockerfiles-ubuntu-ssh
 
 # Building & Running
 
@@ -20,4 +20,4 @@ CONTAINER ID        IMAGE                 COMMAND             CREATED           
 
 To test, use the port that was just located:
 
-	# ssh -p 220 user@localhost 
+	# ssh -p 220 user@localhost
