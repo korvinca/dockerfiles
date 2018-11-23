@@ -1,14 +1,14 @@
 #!/bin/bash
-set -es
+set -e
 
 # PHP
 PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING:-"E_ALL & ~E_DEPRECATED & ~E_NOTICE"}
-sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ America\/Los_Angeles/g' /etc/php5/cli/php.ini
-sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ America\/Los_Angeles/g' /etc/php5/apache2/php.ini
+sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Moscow/g' /etc/php5/cli/php.ini
+sed -ri 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Moscow/g' /etc/php5/apache2/php.ini
 sed -ri 's/^display_errors\s*=\s*Off/display_errors = Off/g' /etc/php5/apache2/php.ini
 sed -ri 's/^open_basedir\s*=\s*Off/open_basedir none/g' /etc/php5/cli/php.ini
-sed -ri "s/^error_reporting\s*=.*$//g" /etc/php5/apache2/php.ini
-sed -ri "s/^error_reporting\s*=.*$//g" /etc/php5/cli/php.ini
+sed -ri 's/^error_reporting\s*=.*$//g' /etc/php5/apache2/php.ini
+sed -ri 's/^error_reporting\s*=.*$//g' /etc/php5/cli/php.ini
 sed -ri 's/post_max_size = 8M/post_max_size = 70M/g' /etc/php5/apache2/php.ini
 sed -ri 's/upload_max_filesize = 2M/upload_max_filesize = 64M/g' /etc/php5/apache2/php.ini
 
@@ -31,8 +31,10 @@ echo "apc.num_files_hint = 2048" >> /etc/php5/apache2/php.ini
 echo "apc.file_update_protection = 3" >> /etc/php5/apache2/php.ini
 
 # Postfix
-mkfifo /var/spool/postfix/public/pickup
-ps aux | grep mail kill /etc/init.d/postfix restart
+#mkfifo /var/spool/postfix/public/pickup
+#ps aux | grep mail
+#kill
+/etc/init.d/postfix restart
 
 #Apache2
 sed -ri 's/KeepAlive On/KeepAlive Off/g' /etc/apache2/apache2.conf
